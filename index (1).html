@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vijay Alagesan — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink: #1c2b39;
+    --ink-soft: #3a4c5c;
+    --paper: #f5f1e6;
+    --paper-line: #dcd4c0;
+    --ochre: #b9852a;
+    --teal: #2c6b62;
+    --rule-red: #9c3f34;
+    --white: #fffdf7;
+
+    --font-display: 'Fraunces', serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--paper-line) 1px, transparent 1px) 0 0/100% 42px,
+      var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    line-height: 1.55;
+  }
+
+  a{ color: inherit; }
+  ::selection{ background: var(--ochre); color: var(--white); }
+
+  :focus-visible{
+    outline: 2px solid var(--teal);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- Header / nav ---------- */
+  header{
+    padding: 22px 0 0;
+  }
+  .header-row{
+    display:flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .brand{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  nav{
+    display:flex;
+    gap: 22px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+  nav a{
+    text-decoration: none;
+    color: var(--ink-soft);
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+    transition: border-color .2s, color .2s;
+  }
+  nav a:hover, nav a:focus-visible{
+    color: var(--ink);
+    border-color: var(--ochre);
+  }
+
+  /* ---------- Hero: the mark-sheet header ---------- */
+  .hero{
+    padding: 54px 0 44px;
+  }
+  .hero-eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--rule-red);
+    margin: 0 0 10px;
+  }
+  .hero h1{
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(42px, 8vw, 78px);
+    line-height: 0.98;
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+  }
+  .hero-sub{
+    font-size: 18px;
+    max-width: 56ch;
+    color: var(--ink-soft);
+    margin: 0 0 30px;
+  }
+
+  .statline{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .stat{
+    flex: 1 1 160px;
+    padding: 16px 18px;
+    border-right: 1px solid var(--paper-line);
+  }
+  .stat:last-child{ border-right: none; }
+  .stat .num{
+    font-family: var(--font-mono);
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--teal);
+    display:block;
+  }
+  .stat .label{
+    font-size: 12px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---------- Section scaffolding ---------- */
+  section{
+    padding: 52px 0;
+    border-top: 1px solid var(--paper-line);
+  }
+  .section-head{
+    display:flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 30px;
+  }
+  .section-tag{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--rule-red);
+    letter-spacing: 0.1em;
+  }
+  .section-head h2{
+    font-family: var(--font-display);
+    font-size: 30px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  /* ---------- Summary ---------- */
+  .summary p{
+    font-size: 17px;
+    max-width: 68ch;
+    color: var(--ink-soft);
+  }
+  .summary p + p{ margin-top: 14px; }
+
+  /* ---------- Skills: ledger table ---------- */
+  .ledger{
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+  }
+  .ledger tr{ border-bottom: 1px solid var(--paper-line); }
+  .ledger tr:first-child{ border-top: 1px solid var(--ink); }
+  .ledger tr:last-child{ border-bottom: 1px solid var(--ink); }
+  .ledger td{
+    padding: 14px 10px;
+    vertical-align: top;
+  }
+  .ledger td.idx{
+    font-family: var(--font-mono);
+    color: var(--ochre);
+    width: 46px;
+    font-size: 13px;
+  }
+  .ledger td.desc{ color: var(--ink-soft); }
+  .ledger td.name{ font-weight: 600; }
+
+  /* ---------- Education: mark-sheet cards ---------- */
+  .marksheet{
+    border: 1px solid var(--ink);
+    background: var(--white);
+  }
+  .marksheet + .marksheet{ margin-top: 22px; }
+  .marksheet-head{
+    display:flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 16px 20px;
+    border-bottom: 1px dashed var(--paper-line);
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .marksheet-head h3{
+    font-family: var(--font-display);
+    font-size: 21px;
+    margin: 0;
+    font-weight: 600;
+  }
+  .marksheet-head .period{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .marksheet-body{
+    padding: 18px 20px 20px;
+  }
+  .marksheet-inst{
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+    font-size: 15px;
+  }
+  .score-row{
+    display:flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .score-bar{
+    flex: 1;
+    height: 10px;
+    background: var(--paper-line);
+    position: relative;
+    overflow: hidden;
+  }
+  .score-fill{
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), var(--ochre));
+    width: 0%;
+    transition: width 1.1s cubic-bezier(.2,.8,.2,1);
+  }
+  .score-fill.filled{ width: var(--pct); }
+  .score-num{
+    font-family: var(--font-mono);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+    min-width: 62px;
+    text-align: right;
+  }
+
+  /* ---------- Languages ---------- */
+  .langs{
+    display:flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .lang{
+    min-width: 170px;
+  }
+  .lang h4{
+    font-family: var(--font-display);
+    font-size: 19px;
+    margin: 0 0 10px;
+  }
+  .lang .dots{
+    display:flex;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-family: var(--font-mono);
+  }
+  .lang .dot-item{ display:flex; align-items:center; gap:6px; }
+  .dot-item .swatch{
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--teal);
+    display:inline-block;
+  }
+  .lang .prof{
+    margin-top: 8px;
+    font-size: 13px;
+    color: var(--rule-red);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* ---------- Activities ---------- */
+  .activities{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+  }
+  .activities li{
+    border: 1px solid var(--paper-line);
+    background: var(--white);
+    padding: 16px 18px;
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    position: relative;
+    padding-left: 34px;
+  }
+  .activities li::before{
+    content: "○";
+    position: absolute;
+    left: 14px;
+    top: 15px;
+    color: var(--ochre);
+    font-family: var(--font-mono);
+  }
+
+  /* ---------- Contact / footer ---------- */
+  .contact{
+    padding: 54px 0 60px;
+  }
+  .contact h2{
+    font-family: var(--font-display);
+    font-size: clamp(30px, 5vw, 46px);
+    margin: 0 0 20px;
+  }
+  .contact-grid{
+    display:flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+  }
+  .contact-item{
+    font-family: var(--font-mono);
+    font-size: 14px;
+  }
+  .contact-item .k{
+    display:block;
+    color: var(--rule-red);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+  .contact-item a{
+    text-decoration: none;
+    border-bottom: 1px solid var(--ink);
+  }
+  .contact-item a:hover, .contact-item a:focus-visible{
+    color: var(--teal);
+    border-color: var(--teal);
+  }
+
+  footer{
+    border-top: 1px solid var(--ink);
+    padding: 20px 0 40px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (max-width: 600px){
+    .statline{ flex-direction: column; }
+    .stat{ border-right: none; border-bottom: 1px solid var(--paper-line); }
+    .stat:last-child{ border-bottom: none; }
+    nav{ gap: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-row">
+    <div class="brand">V. Alagesan — Roll No. STAT/2021</div>
+    <nav>
+      <a href="#summary">Summary</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <p class="hero-eyebrow">Statistics Graduate · Kumbakonam, Tamil Nadu</p>
+    <h1>Vijay<br>Alagesan</h1>
+    <p class="hero-sub">A results-driven professional who brings a statistician's discipline to everyday work — organised, analytical, and steady under a fast-paced schedule.</p>
+
+    <div class="statline">
+      <div class="stat">
+        <span class="num">B.Sc.</span>
+        <span class="label">Statistics, 2021</span>
+      </div>
+      <div class="stat">
+        <span class="num">68.04%</span>
+        <span class="label">Degree Aggregate</span>
+      </div>
+      <div class="stat">
+        <span class="num">2</span>
+        <span class="label">Languages Spoken</span>
+      </div>
+      <div class="stat">
+        <span class="num">TN</span>
+        <span class="label">Based in Kumbakonam</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="summary" class="wrap summary">
+    <div class="section-head">
+      <span class="section-tag">01</span>
+      <h2>Professional Summary</h2>
+    </div>
+    <p>Results-driven professional known for a solid track record in delivering quality work and achieving organisational goals. Demonstrates excellent communication and teamwork abilities while fostering a proactive attitude towards continuous learning and professional development.</p>
+    <p>Eager to contribute effectively within a dynamic team environment — bringing a statistician's eye for detail to whatever the task calls for.</p>
+  </section>
+
+  <section id="skills" class="wrap">
+    <div class="section-head">
+      <span class="section-tag">02</span>
+      <h2>Skill Set</h2>
+    </div>
+    <table class="ledger">
+      <tbody>
+        <tr>
+          <td class="idx">01</td>
+          <td class="name">Time Management</td>
+          <td class="desc">Effectively manages time to ensure timely task completion.</td>
+        </tr>
+        <tr>
+          <td class="idx">02</td>
+          <td class="name">Multitasking</td>
+          <td class="desc">Skilled in multitasking in fast-paced environments.</td>
+        </tr>
+        <tr>
+          <td class="idx">03</td>
+          <td class="name">Computer Applications</td>
+          <td class="desc">Proficient across various computer applications, including Microsoft Office tools.</td>
+        </tr>
+        <tr>
+          <td class="idx">04</td>
+          <td class="name">Adaptability</td>
+          <td class="desc">Adapts quickly to new technologies and processes.</td>
+        </tr>
+        <tr>
+          <td class="idx">05</td>
+          <td class="name">Analytical Thinking</td>
+          <td class="desc">Strong analytical abilities applied toward strategic solutions.</td>
+        </tr>
+        <tr>
+          <td class="idx">06</td>
+          <td class="name">Business Growth</td>
+          <td class="desc">Identifies and contributes to business growth opportunities.</td>
+        </tr>
+        <tr>
+          <td class="idx">07</td>
+          <td class="name">Teamwork</td>
+          <td class="desc">Exceptional team player who fosters a positive environment.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="education" class="wrap">
+    <div class="section-head">
+      <span class="section-tag">03</span>
+      <h2>Education</h2>
+    </div>
+
+    <div class="marksheet">
+      <div class="marksheet-head">
+        <h3>B.Sc. Statistics</h3>
+        <span class="period">Aug 2018 — Jul 2021</span>
+      </div>
+      <div class="marksheet-body">
+        <p class="marksheet-inst">Government Arts College (Autonomous), Kumbakonam</p>
+        <div class="score-row">
+          <div class="score-bar"><div class="score-fill" data-pct="68.04" style="--pct:68.04%"></div></div>
+          <span class="score-num">68.04%</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="marksheet">
+      <div class="marksheet-head">
+        <h3>Higher Secondary</h3>
+        <span class="period">Jun 2017 — Mar 2018</span>
+      </div>
+      <div class="marksheet-body">
+        <p class="marksheet-inst">Native Higher Secondary School, Kumbakonam</p>
+        <div class="score-row">
+          <div class="score-bar"><div class="score-fill" data-pct="55.5" style="--pct:55.5%"></div></div>
+          <span class="score-num">55.5%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head">
+      <span class="section-tag">04</span>
+      <h2>Languages</h2>
+    </div>
+    <div class="langs">
+      <div class="lang">
+        <h4>Tamil</h4>
+        <div class="dots">
+          <span class="dot-item"><span class="swatch"></span>Read</span>
+          <span class="dot-item"><span class="swatch"></span>Write</span>
+          <span class="dot-item"><span class="swatch"></span>Speak</span>
+        </div>
+        <div class="prof">Excellent</div>
+      </div>
+      <div class="lang">
+        <h4>English</h4>
+        <div class="dots">
+          <span class="dot-item"><span class="swatch"></span>Read</span>
+          <span class="dot-item"><span class="swatch"></span>Write</span>
+          <span class="dot-item"><span class="swatch"></span>Speak</span>
+        </div>
+        <div class="prof">Good</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head">
+      <span class="section-tag">05</span>
+      <h2>Extra-Curricular</h2>
+    </div>
+    <ul class="activities">
+      <li>Coordinated and organised various cultural activities in college</li>
+      <li>Demonstrated good sportsmanship abilities</li>
+      <li>Participated in cricket tournaments</li>
+    </ul>
+  </section>
+
+  <section id="contact" class="wrap contact">
+    <div class="section-head">
+      <span class="section-tag">06</span>
+      <h2>Let's work together</h2>
+    </div>
+    <p style="max-width:52ch;color:var(--ink-soft);font-size:16px;">Open to opportunities where careful, analytical work makes a difference. Reach out any time.</p>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span class="k">Phone</span>
+        <a href="tel:+918220944198">+91 82209 44198</a>
+      </div>
+      <div class="contact-item">
+        <span class="k">Email</span>
+        <a href="mailto:vijaykutty037@gmail.com">vijaykutty037@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <span class="k">Location</span>
+        <span>Kumbakonam, Tamil Nadu</span>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  <span>© <span id="year"></span> Vijay Alagesan</span>
+  <span>Built with care.</span>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Animate score bars once visible
+  const bars = document.querySelectorAll('.score-fill');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add('filled');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  bars.forEach(bar => io.observe(bar));
+</script>
+
+</body>
+</html>
